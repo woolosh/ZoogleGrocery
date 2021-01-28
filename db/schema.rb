@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2021_01_27_192100) do
 
   create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "current_location"
+    t.string "username"
+    t.string "current_zip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
