@@ -57,6 +57,3 @@ end
 
 #3. displays the nearest matching store's inventory to the user
 # ----
-
-
-
