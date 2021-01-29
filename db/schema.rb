@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2021_01_27_192100) do
 
+  create_table "carts", force: :cascade do |t|
+    t.integer "items_id"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_carts_on_customer_id"
+    t.index ["items_id"], name: "index_carts_on_items_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "username"
     t.string "current_zip"
@@ -34,15 +43,6 @@ ActiveRecord::Schema.define(version: 2021_01_27_192100) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "purchases", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "customer_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_purchases_on_customer_id"
-    t.index ["item_id"], name: "index_purchases_on_item_id"
   end
 
   create_table "stores", force: :cascade do |t|

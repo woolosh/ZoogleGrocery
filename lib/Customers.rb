@@ -1,7 +1,7 @@
 require 'pry'
 class Customer < ActiveRecord::Base
-    has_many :purchases
-    has_many :items, through: :purchases
+    has_one :cart
+    has_many :items, through: :cart
 
     def stores_by_distance
         Store.all.sort_by{
