@@ -37,6 +37,7 @@ class Customer < ActiveRecord::Base
             store.distance(self)
         }[0,3]
         store_iterator = store.map{|store| store.name + ' at ' + store.address}
+        return "There is no #{store_name} near you." if store_iterator.empty? 
         "Here is/are the closest #{store_name}(s) to you:
         #{store_iterator}"
    end

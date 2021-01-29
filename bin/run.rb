@@ -13,6 +13,12 @@ customer = Customer.all.find{|cus| username == cus.username}
 
 if customer     
     puts "Welcome back, #{customer.username}!"
+    puts "Would you like to update your location? (Y/N)"
+    choice = gets.chomp
+    if choice.capitalize == "Y"
+        puts "What is your updated zip code?"
+        customer.current_zip = gets.chomp
+    end
 else
     puts "Enter your zip code"
     zip_code = gets.chomp
@@ -21,11 +27,18 @@ else
 end
 
 def continue?
-    puts "Do you want to select another option? (Y/N)"
-    continue = gets.chomp
-    if continue.capitalize == "N"
-        puts "Goodbye!"
-        exit
+x = true
+    while x do 
+        puts "Do you want to select another option? (Y/N)"
+        continue = gets.chomp
+        if continue.capitalize == "N"
+            puts "See you next time!"
+            exit
+        elsif continue.capitalize != "Y"
+            puts "Pls only type Y or N"
+        else
+            x = false
+        end
     end
 end
 
@@ -49,20 +62,16 @@ while true do
     if user_choice == "1"
         puts customer.more_stores
         continue?
-        # puts "Do you want to select another option? (Y/N)"
-        # continue = gets.chomp
-        # if continue == "N"
-        #     puts "Goodbye!"
-        #     exit 
-        # end
     elsif user_choice == "2"
         puts "What is the name of the store?"
         store = gets.chomp
+        store.capitalize!
         puts customer.find_store_by_name(store)
         continue?
     elsif user_choice == "3"
         puts "What is the name of the store?"
         store = gets.chomp
+        store.capitalize!
         store = Store.find_by(name: store)
         puts store.inventory_list
         continue?
@@ -73,8 +82,10 @@ while true do
         puts Inventory.get_stores_with_item(item)
         continue?
     elsif user_choice == "5"
-        puts "Goodbye!"
+        puts "See you next time!"
         exit
+    else
+        puts "Pls choose a valid number (1-5)"
     end
 end
 
@@ -83,12 +94,4 @@ end
 #4.1 check inventory of chosen store
 #4.2 add_to_cart
 #4.3 view cart
-
-#puts "Goodbye"
 #--------------------------------------------------------------------
-#1.check_for_more_stores: displays more stores
-
-#2. gets the name of the store, and displays the stores to the user
-
-#3. displays the nearest matching store's inventory to the user
-# ----
