@@ -20,27 +20,62 @@ else
     puts "Welcome, #{customer.username}"
 end
 
+def continue?
+    puts "Do you want to select another option? (Y/N)"
+    continue = gets.chomp
+    if continue.capitalize == "N"
+        puts "Goodbye!"
+        exit
+    end
+end
 
 
 
 puts "Here are your 3 closest stores: #{customer.nearby_stores}"
 puts "\n"
-puts "What would you like to do"
-puts "You can: 
-1. Check for more stores 
-2. Find store by name 
-3. Check inventory by store_name"
 
-user_choice = gets.chomp
+while true do 
+    puts "What would you like to do"
+    puts "You can: 
+    1. Check for more stores 
+    2. Find store by name 
+    3. Check inventory by store_name
+    4. Find stores by item
+    5. Exit
+    Pls enter a number"
 
-if user_choice == "1"
-    puts customer.more_stores
-elsif user_choice == "2"
-    puts "What is the name of the store?"
-    store = gets.chomp
-    puts customer.find_store_by_name(store)
-elsif user_choice == "3"
+    user_choice = gets.chomp
 
+    if user_choice == "1"
+        puts customer.more_stores
+        continue?
+        # puts "Do you want to select another option? (Y/N)"
+        # continue = gets.chomp
+        # if continue == "N"
+        #     puts "Goodbye!"
+        #     exit 
+        # end
+    elsif user_choice == "2"
+        puts "What is the name of the store?"
+        store = gets.chomp
+        puts customer.find_store_by_name(store)
+        continue?
+    elsif user_choice == "3"
+        puts "What is the name of the store?"
+        store = gets.chomp
+        store = Store.find_by(name: store)
+        puts store.inventory_list
+        continue?
+    elsif user_choice == "4"
+        puts "What item would you like to search for"
+        item = gets.chomp
+        item.capitalize!
+        puts Inventory.get_stores_with_item(item)
+        continue?
+    elsif user_choice == "5"
+        puts "Goodbye!"
+        exit
+    end
 end
 
 
